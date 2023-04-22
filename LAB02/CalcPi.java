@@ -79,12 +79,17 @@ class CalcPi {
           sumTotal += threads[i].getSum();
       }
 
+      double maxError = 4*(Math.pow(-1, nTerms) * (1.0/(2*nTerms+1))); //Erro maximo eh limitado pelo proximo termo do somatorio
+      double error = Math.PI - 4*sumTotal;
+
       System.out.println(String.format("Estimated value (%d Threads): %.8f", nThreads, 4*sumTotal));
       System.out.println(String.format("Estimated value (Sequential): %.8f", 4*sumSeq));
+      System.out.println(String.format("Pi value: %.8f", Math.PI));
+      System.out.println(String.format("Error <= %.8f", maxError));
+      System.out.println(String.format("Actual error: %.8f", error));
 
-      //--PASSO 5: conferindo se a conta bateu. Como estamos tratando com valores de ponto flutuante, usamos uma margem de erro
-      double erro = 4*sumSeq - 4*sumTotal;
-      if (erro <= Math.pow(10,-8)) {
+      //--PASSO 5: conferindo se a conta bateu. Como estamos tratando com valores de ponto flutuante, usamos uma margem de erro (calculada acima)
+      if (error <= maxError) {
          System.out.println("Está correto");
       }
    }
