@@ -1,6 +1,5 @@
 #/* Disciplina: Programacao Concorrente */
-#/* Prof.: Silvana Rossetto */
-#/* Módulo 4 - Laboratório: 7 */
+#/* Aluno: Lucas Araujo Carvalho - 119187632 */
 #/* Codigo: calculando pi com threads */  
 
 from threading import Thread
@@ -8,7 +7,7 @@ import time
 import math
 
 #Variaveis globais
-N = 10000000
+N = 1000000
 THREADS = 4
 pi_est = 0
 
@@ -41,6 +40,9 @@ print(f"Tempo: {time.time() - start}")
 print(f"Estimativa: {4*pi_est:.8f}")
 print(f"Valor Real: {math.pi:.8f}")
 
-# Confere se a diferença entre o valor real de pi e a estimativa é menor que um determinado valor de erro
-if (abs(math.pi - 4*pi_est) <= 1/N):
+# Confere se a diferença entre o valor real de pi e a estimativa é menor que um determinado valor de erro (próximo termo do somatório)
+diferenca = abs(math.pi - 4*pi_est)
+prox = 4*((-1)**N/(2*N + 1))
+
+if (diferenca <= prox):
     print("\nA estimativa está correta")
